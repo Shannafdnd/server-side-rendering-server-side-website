@@ -44,8 +44,7 @@ app.get('/', function (request, response){
     // Haal alle data uit de API op
   
     fetchJson( apiUrl).then((apiData) => {
-      // apiData bevat gegevens van alle personen uit alle squads
-      // Je zou dat hier kunnen filteren, sorteren, of zelfs aanpassen, voordat je het doorgeeft aan de view
+     // Je zou dat hier kunnen filteren, sorteren, of zelfs aanpassen, voordat je het doorgeeft aan de view
   
       // Render index.ejs uit de views map en geef de opgehaalde data mee als variabele
       response.render('index', 
