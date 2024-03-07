@@ -1,17 +1,26 @@
 <%- include('./partials/head') %>
 
     <header>
-        <a>ALUMNI</a>
-        <a>COLOFON</a>
-        <a>OVER</a>
-        <a>MEEDOEN</a>
-        <a>CONTACT</a>
+        
     </header>
-    
+
     <%- include('./partials/nav') %>
 
     <main>
-
+        <section class="posts"
+        <%
+            posts
+            .filter((post) => post.status == "publish") // only show published posts
+            .forEach((post) => {
+                %>
+                <div class="post">
+                    <h3><%- post.title.rendered %></h3>
+                    <img src="<%= post.yoast_head_json.og_image.url %>"></img>
+                </div>
+                <p>Door <a class="author" href="/author/<%= post.author %>"><%= post.yoast_head_json.author %></a></p>
+                <%
+            })
+        %>
     </main>
 
     <%- include('./partials/footer') %>

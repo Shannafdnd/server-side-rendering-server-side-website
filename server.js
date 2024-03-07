@@ -34,9 +34,6 @@ app.listen(app.get('port'), function () {
 
 //*** Data ***
 
-const res = await fetch('https://redpers.nl/wp-json/wp/v2/posts');
-const post = await res.json()
-
 // *** Routes ***
 
 // Maak een GET route voor de index
@@ -48,6 +45,17 @@ app.get('/', function (request, response){
   
       // Render index.ejs uit de views map en geef de opgehaalde data mee als variabele
       response.render('index', 
-      {})
+      {posts: apiData});
     })
   })
+
+app.get('/author/:id', function (request, response){
+
+  fetchJson( `https://redpers.nl/wp-json/wp/v2/posts?author=${request.params.id}`).then((apiData) => {
+    // Je zou dat hier kunnen filteren, sorteren, of zelfs aanpassen, voordat je het doorgeeft aan de view
+ 
+     // Render index.ejs uit de views map en geef de opgehaalde data mee als variabele
+     response.render('index', 
+     {posts: apiData});
+   })
+})
