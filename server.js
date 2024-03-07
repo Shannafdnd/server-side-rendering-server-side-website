@@ -33,6 +33,8 @@ app.listen(app.get('port'), function () {
 
 
 //*** Data ***
+let res = await fetch("https://redpers.nl/wp-json/wp/v2/categories/");
+let categories = await res.json();
 
 // *** Routes ***
 
@@ -41,21 +43,42 @@ app.get('/', function (request, response){
     // Haal alle data uit de API op
   
     fetchJson( 'https://redpers.nl/wp-json/wp/v2/posts').then((apiData) => {
+      
      // Je zou dat hier kunnen filteren, sorteren, of zelfs aanpassen, voordat je het doorgeeft aan de view
   
       // Render index.ejs uit de views map en geef de opgehaalde data mee als variabele
       response.render('index', 
-      {posts: apiData});
+      {posts: apiData, categories});
     })
   })
 
+// Maak een GET route voor author
 app.get('/author/:id', function (request, response){
 
   fetchJson( `https://redpers.nl/wp-json/wp/v2/posts?author=${request.params.id}`).then((apiData) => {
-    // Je zou dat hier kunnen filteren, sorteren, of zelfs aanpassen, voordat je het doorgeeft aan de view
  
      // Render index.ejs uit de views map en geef de opgehaalde data mee als variabele
      response.render('index', 
      {posts: apiData});
    })
+})
+
+// Maak een GET route voor de posts 
+app.get('/post/:id', function (request, response){
+
+  fetchJson( `https://redpers.nl/wp-json/wp/v2/posts/${request.params.id}`).then((apiData) => {
+     // Render post.ejs uit de views map en geef de opgehaalde data mee als variabele
+     response.render('post', 
+     {post: apiData});
+   })
+})
+
+// Maak een GET route voor de catogorie
+app.get('/catogorie', function (request, response) {
+  fetchJson().then((apiData) => {
+    
+    // Render catogorie.ejs uit de views map en geef de opgehaalde data mee als variabele
+    // HTML maken op basis van JSON data
+    response.render('catogorie', {})
+  })
 })
