@@ -33,8 +33,21 @@ app.listen(app.get('port'), function () {
 
 
 //*** Data ***
-let res = await fetch("https://redpers.nl/wp-json/wp/v2/categories/");
-let categories = await res.json();
+const apiUrl = 'https://redpers.nl/wp-json/wp/v2/'
+const postsUrl = apiUrl + 'posts'
+const categoriesUrl = apiUrl+ 'categories'
+// const usersUrl = apiUrl + 'users'
+const categoriesData = [
+  {"id": 9, "name": "Binnenland", "slug": "binnenland"},
+  {"id": 1010, "name": "Buitenland", "slug": "buitenland"}, 
+  {"id": 10, "name": "Columns", "slug": "columns"},
+  {"id": 6, "name": "Economie", "slug": "economie"},
+  {"id": 4, "name": "Kunst & Media", "slug": "kunst-media"},
+  {"id": 3211, "name": "Podcasts", "slug": "podcast"},
+  {"id": 63, "name": "Politiek", "slug": "politiek"},
+  {"id": 94, "name": "Wetenshap", "slug": "wetenschap"},
+ ]
+
 
 // *** Routes ***
 
@@ -73,12 +86,12 @@ app.get('/post/:id', function (request, response){
    })
 })
 
-// Maak een GET route voor de catogorie
-app.get('/catogorie', function (request, response) {
+// Maak een GET route voor de catogorien
+app.get('/catogories', function (request, response) {
   fetchJson().then((apiData) => {
     
     // Render catogorie.ejs uit de views map en geef de opgehaalde data mee als variabele
     // HTML maken op basis van JSON data
-    response.render('catogorie', {})
+    response.render('catogories', {})
   })
 })

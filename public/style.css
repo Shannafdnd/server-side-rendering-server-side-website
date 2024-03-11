@@ -9,6 +9,10 @@ a:hover {
     text-decoration: underline;
 }
 
+.menu-button, .search-button {
+    max-width: 1.5rem;
+}
+
 .posts {
     display: flex;
     flex-direction: column;
