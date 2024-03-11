@@ -9,8 +9,18 @@ a:hover {
     text-decoration: underline;
 }
 
-.menu-button, .search-button {
-    max-width: 1.5rem;
+header {
+    button {
+        all: unset;
+        cursor: pointer;
+        img {
+            max-width: 1.5rem;
+        }
+    }
+
+    nav.closed {
+        display: none;
+    }
 }
 
 .posts {

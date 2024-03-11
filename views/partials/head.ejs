@@ -5,26 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/style.css">
     <script src="/client.js" defer></script>
-    <title>Document</title>
+    <% if (typeof yoast_head !== 'undefined') {%>
+        <%- yoast_head %>
+    <%} else {%>
+        <title><%= title %></title>
+    <%}%>
 </head>
 <body>
     <header>
-        <nav>
-            <img class="menu-button" src="/assets/menu-svgrepo-com.svg" alt="Menu button"></img>
-            <a href="">Voorpagina</a>
-            <a href="">Binnenland</a>
-            <a href="">Buitenland</a>
-            <a href="">Columns</a>
-            <a href="">Economie</a>
-            <a href="">Kunst & Media</a>
-            <a href="">Podcasts</a>
-            <a href="">Politiek</a>
-            <a href="">Wetenschap</a>
-            <a href="">Alumni</a>
-            <a href="">Colofon</a>
-            <a href="">Over</a>
-            <a href="">Meedoen</a>
-            <a href="">Contact</a>
-            <img class="search-button" src="/assets/search1-svgrepo-com.svg" alt="Search button"></img>
+        <button class="menu-button" role="button"><img src="/assets/menu-svgrepo-com.svg" alt="Menu button"></img></button>
+        <nav class="closed">
+            <a href="/">Voorpagina</a>
+            <%
+            categories.forEach((category) => {%>
+                <a href="/categorie/<%= category.slug %>"><%= category.name %></a>
+            <%});%>
         </nav>
+        <button class="search-button"><img src="/assets/search1-svgrepo-com.svg" alt="Search button"></img></button>
     </header>

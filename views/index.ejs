@@ -6,11 +6,10 @@
         <section class="posts">
         <%
             posts
-            .filter((post) => post.status == "publish") // only show published posts
             .forEach((post) => {
                 %>
                 <article class="post">
-                    <a href="/post/<%= post.id %>" class="article-link">
+                    <a href="/post/<%= post.slug %>" class="article-link">
                         <img src="<%= post.yoast_head_json.og_image[0].url %>"></img>
                         <h3><%- post.title.rendered %></h3>
                     </a>

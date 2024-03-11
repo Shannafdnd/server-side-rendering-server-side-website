@@ -37,7 +37,7 @@ const apiUrl = 'https://redpers.nl/wp-json/wp/v2/'
 const postsUrl = apiUrl + 'posts'
 const categoriesUrl = apiUrl+ 'categories'
 // const usersUrl = apiUrl + 'users'
-const categoriesData = [
+const categories = [
   {"id": 9, "name": "Binnenland", "slug": "binnenland"},
   {"id": 1010, "name": "Buitenland", "slug": "buitenland"}, 
   {"id": 10, "name": "Columns", "slug": "columns"},
@@ -46,8 +46,7 @@ const categoriesData = [
   {"id": 3211, "name": "Podcasts", "slug": "podcast"},
   {"id": 63, "name": "Politiek", "slug": "politiek"},
   {"id": 94, "name": "Wetenshap", "slug": "wetenschap"},
- ]
-
+];
 
 // *** Routes ***
 
@@ -55,43 +54,44 @@ const categoriesData = [
 app.get('/', function (request, response){
     // Haal alle data uit de API op
   
-    fetchJson( 'https://redpers.nl/wp-json/wp/v2/posts').then((apiData) => {
+    fetchJson( `${apiUrl}posts`).then((apiData) => {
       
      // Je zou dat hier kunnen filteren, sorteren, of zelfs aanpassen, voordat je het doorgeeft aan de view
   
       // Render index.ejs uit de views map en geef de opgehaalde data mee als variabele
       response.render('index', 
-      {posts: apiData, categories});
+      {posts: apiData, categories, title: "Red pers - Podium voor de Journalistiek"});
     })
   })
 
-// Maak een GET route voor author
+// Maak een GET route voor de author page
 app.get('/author/:id', function (request, response){
 
-  fetchJson( `https://redpers.nl/wp-json/wp/v2/posts?author=${request.params.id}`).then((apiData) => {
+  fetchJson( `${apiUrl}posts?author=${request.params.id}`).then((apiData) => {
  
      // Render index.ejs uit de views map en geef de opgehaalde data mee als variabele
      response.render('index', 
-     {posts: apiData});
+     {posts: apiData, categories, title: `Red pers - artikelen door ${apiData[0].yoast_head_json.author}`});
    })
 })
 
-// Maak een GET route voor de posts 
-app.get('/post/:id', function (request, response){
+// Maak een GET route voor de post pagina
+app.get('/post/:slug', function (request, response){
 
-  fetchJson( `https://redpers.nl/wp-json/wp/v2/posts/${request.params.id}`).then((apiData) => {
+  fetchJson( `${apiUrl}posts?slug=${request.params.slug}`).then((apiData) => {
      // Render post.ejs uit de views map en geef de opgehaalde data mee als variabele
      response.render('post', 
-     {post: apiData});
+     {post: apiData[0], categories, yoast_head: apiData[0].yoast_head});
    })
 })
 
-// Maak een GET route voor de catogorien
-app.get('/catogories', function (request, response) {
-  fetchJson().then((apiData) => {
+// Maak een GET route voor de catogoriepagina
+app.get('/categorie/:slug', function (request, response) {
+  const category = categories.find((c) => c.slug == request.params.slug);
+  fetchJson(`${apiUrl}posts?categories=${category.id}`).then((apiData) => {
     
     // Render catogorie.ejs uit de views map en geef de opgehaalde data mee als variabele
     // HTML maken op basis van JSON data
-    response.render('catogories', {})
+    response.render('index', {posts: apiData, categories, title: `Red pers - ${category.name} archieven`});
   })
 })
