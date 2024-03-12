@@ -10,6 +10,10 @@ a:hover {
 }
 
 header {
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-around;
+
     button {
         all: unset;
         cursor: pointer;
@@ -20,6 +24,10 @@ header {
 
     nav.closed {
         display: none;
+    }
+
+    .logo {
+        width: 10rem;
     }
 }
 
@@ -34,17 +42,14 @@ header {
         max-width: 90vw;
     
         .article-link {
+            display: block;
             width: 100%;
-            border: 1px solid black;
+            border-bottom: 1px solid black;
         }
 
         img {
             max-width: 100%;
             object-fit: contain;
         }
-    }
-    
-    .post:nth-of-type(0) {
-        border: none;
     }
 }
