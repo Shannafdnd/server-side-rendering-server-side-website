@@ -13,7 +13,6 @@
 </head>
 <body>
     <header>
-        <button class="menu-button" role="button"><img src="/assets/menu-svgrepo-com.svg" alt="Menu button"></img></button>
         <nav class="closed">
             <a href="/">Voorpagina</a>
             <%
@@ -21,6 +20,10 @@
                 <a href="/categorie/<%= category.slug %>"><%= category.name %></a>
             <%});%>
         </nav>
-        <img class="logo" src="/assets/RedPers_Logo_Cmyk_Black.webp" alt="Red Pers logo"></img>
-        <button class="search-button"><img src="/assets/search1-svgrepo-com.svg" alt="Search button"></img></button>
+        <button class="menu-button" role="button">
+            <img class="menu-icon" src="/assets/menu-svgrepo-com.svg" alt="Menu button">
+            <img class="close-icon" src="/assets/icons8-close.svg" alt="Close button">
+        </button>
+        <img class="logo" src="/assets/RedPers_Logo_Cmyk_Black.webp" alt="Red Pers logo">
+        <button class="search-button"><img src="/assets/search1-svgrepo-com.svg" alt="Search button"></button>
     </header>

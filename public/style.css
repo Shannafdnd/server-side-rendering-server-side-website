@@ -1,5 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Hachi+Maru+Pop&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 
+body {
+    margin: 0;
+}
+
+
+.menu-button {
+    z-index: 1;
+
+    .menu-icon {
+        display: none;
+    }
+
+    .close-icon {
+        display: block;
+    }
+}
+
+.closed + .menu-button {
+    .menu-icon {
+        display: block;
+    }
+
+    .close-icon {
+        display: none;
+    }
+}
+
+main {
+    margin: 1rem
+}
+
 a {
     text-decoration: none;
     color: unset;
@@ -12,7 +43,9 @@ a:hover {
 header {
     border-bottom: 1px solid black;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin: 1rem;
+    padding: 1rem;
 
     button {
         all: unset;
@@ -22,8 +55,22 @@ header {
         }
     }
 
+    nav {
+        position: fixed;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        top: 0;
+        left: 0;
+        width: 67vw;
+        height: 100vh;
+        padding-top: 5rem;
+        transition: left 0.3s;
+    }
+
     nav.closed {
-        display: none;
+        left: -67vw;
+        transition: left 0.3s;
     }
 
     .logo {
