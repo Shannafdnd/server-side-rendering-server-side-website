@@ -52,11 +52,14 @@ const categories = [
 
 // Maak een GET route voor de index
 app.get('/', function (request, response){
-    // Haal alle data uit de API op
-  
-    fetchJson( `${apiUrl}posts`).then((apiData) => {
-      
-     // Je zou dat hier kunnen filteren, sorteren, of zelfs aanpassen, voordat je het doorgeeft aan de view
+    // Haal de eerste 4 posts op
+
+    Promise.all(
+      [fetchJson(`${apiUrl}posts?per_page=4`)] // Haal de eerste 4 posts op
+      .concat(categories.map((category) => fetchJson(`${apiUrl}posts?per_page=3&categories=${category.id}`))) // Haal de eerste 3 posts van elke catagorie op
+    ).then((apiData) => {
+
+      // apiData is een array van arrays van posts.
   
       // Render index.ejs uit de views map en geef de opgehaalde data mee als variabele
       response.render('index', 
@@ -70,8 +73,8 @@ app.get('/author/:id', function (request, response){
   fetchJson( `${apiUrl}posts?author=${request.params.id}`).then((apiData) => {
  
      // Render index.ejs uit de views map en geef de opgehaalde data mee als variabele
-     response.render('index', 
-     {posts: apiData, categories, title: `Red pers - artikelen door ${apiData[0].yoast_head_json.author}`});
+     response.render('author', 
+     {posts: apiData, categories});
    })
 })
 
@@ -89,10 +92,10 @@ app.get('/post/:slug', function (request, response){
 app.get('/categorie/:slug', function (request, response) {
   const category = categories.find((category) => category.slug == request.params.slug);
   // Vind de categorie, waarvan de slug gelijk is aan de aangevraagde slug.
-  Promise.all([fetchJson(`${apiUrl}posts?categories=${category.id}`), fetchJson(categoriesUrl + '/?slug=' + request.params.slug)]).then(([PostData, categoryData]) =>{
+  Promise.all([fetchJson(`${apiUrl}posts?categories=${category.id}`), fetchJson(categoriesUrl + '/?slug=' + request.params.slug)]).then(([postData, category]) =>{ // Door promise.all te gebruiken, kan je meerdere fetches tegelijk doen
     // Render catogorie.ejs uit de views map en geef de opgehaalde data mee als variabele
-    // HTML maken op basis van JSON data
-    response.render('index', {posts: apiData, categories, title: `Red pers - ${category.name} archieven`});
+    
+    response.render('category', {posts: postData, category, categories});
   })
 
 })
