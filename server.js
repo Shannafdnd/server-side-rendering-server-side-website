@@ -87,11 +87,12 @@ app.get('/post/:slug', function (request, response){
 
 // Maak een GET route voor de catogoriepagina
 app.get('/categorie/:slug', function (request, response) {
-  const category = categories.find((c) => c.slug == request.params.slug);
-  fetchJson(`${apiUrl}posts?categories=${category.id}`).then((apiData) => {
-    
+  const category = categories.find((category) => category.slug == request.params.slug);
+  // Vind de categorie, waarvan de slug gelijk is aan de aangevraagde slug.
+  Promise.all([fetchJson(`${apiUrl}posts?categories=${category.id}`), fetchJson(categoriesUrl + '/?slug=' + request.params.slug)]).then(([PostData, categoryData]) =>{
     // Render catogorie.ejs uit de views map en geef de opgehaalde data mee als variabele
     // HTML maken op basis van JSON data
     response.render('index', {posts: apiData, categories, title: `Red pers - ${category.name} archieven`});
   })
+
 })
