@@ -1,11 +1,13 @@
  <header>
 
         <nav class="closed">
-            <a href="/">Voorpagina</a>
-            <%
-            categories.forEach((category) => {%>
-                <a href="/categorie/<%= category.slug %>"><%= category.name %></a>
-            <%});%>
+            <div class="categories">
+                <a href="/">Voorpagina</a>
+                <%
+                categories.forEach((category) => {%>
+                    <a href="/categorie/<%= category.slug %>"><%= category.name %></a>
+                <%});%>
+            </div>
         </nav>
 
         <button class="menu-button" role="button">

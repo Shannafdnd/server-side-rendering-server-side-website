@@ -66,16 +66,22 @@ header {
     nav {
         position: fixed;
         background-color: var(--background-color);
-        display: flex;
-        flex-direction: column;
         top: calc(3rem + 43.4px);
         left: 0;
         width: 67vw;
-        height: 100vh;
+        height: calc(100vh - 3rem - 43.4px);
         transition: left 0.3s;
-        padding: 2rem 0;
-        gap: 1rem;
-        align-items: center;
+
+        .categories {
+            border: var(--border);
+            display: flex;
+            flex-direction: column;
+            margin: 1rem;
+            padding: 2rem;
+            gap: 1rem;
+            align-items: center;
+            height: calc(100vh - 9rem - 43.4px);
+        }
     }
 
     nav.closed {
@@ -115,9 +121,10 @@ header {
     display: flex;
     flex-direction: column;
     border: var(--border);
-    margin: 1rem;
+    margin: 1.5rem;
     padding: 1rem;
     margin-top: 7rem;
+    background-color: white;
 }
 
 /* MAIN */
@@ -135,6 +142,7 @@ main {
     .post {
         border: var(--border);
         max-width: 90vw;
+        background-color: white;
     
         .article-link {
             display: block;
@@ -145,6 +153,7 @@ main {
         img {
             max-width: 100%;
             object-fit: contain;
+            border-bottom: var(--border);
         }
 
         .author {
@@ -152,6 +161,12 @@ main {
             display: block;
             font-size: 0.7rem;
             font-weight: 700;
+        }
+
+        h3 {
+            padding-left: 1rem;
+            font-size: x-large;
+            font-weight: 800;
         }
     }
 }
