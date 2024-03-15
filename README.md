@@ -13,21 +13,23 @@ Red Pers website server side
   * [Licentie](#licentie)
 
 ## Beschrijving
-<!-- In de Beschrijving staat kort beschreven wat voor project het is en wat je hebt gemaakt -->
-<!-- Voeg een mooie poster visual toe 📸 -->
-<!-- Voeg een link toe naar Github Pages 🌐-->
+Dit project is een website voor de journalisten organisatie Red Pers. Ze wilden een betere versie van hun bestaande website, die met WordPress is gemaakt.
+<img width="420" alt="Scherm­afbeelding 2024-03-15 om 08 43 49" src="https://github.com/Shannafdnd/server-side-rendering-server-side-website/assets/144009693/126cc9bb-1b07-4126-ba12-c3870907a6a9">
 
 ## Gebruik
-<!--Bij Gebruik staat hoe je project er uit ziet, hoe het werkt en wat je er mee kan. -->
+Mijn versie van hun website is mobile first gebouwd, heeft een werkend menu, werkende pagina's met echte data, en volgt redelijk de huisstijl. 
+Verder is het nog niet responsive, en de opmaak van sommige pagina's mist nog.
 
 ## Kenmerken
-<!-- Bij Kenmerken staat welke technieken zijn gebruikt en hoe. Wat is de HTML structuur? Wat zijn de belangrijkste dingen in CSS? Wat is er met Javascript gedaan en hoe? Misschien heb je een framwork of library gebruikt? -->
+Deze website is gebouwd met gebruik van node.js en ejs html. 
 
 ## Installatie
-<!-- Bij Instalatie staat hoe een andere developer aan jouw repo kan werken -->
-
+Je kan mijn repo forken als je eraan wilt werken.
 
 ## Bronnen
+https://redpers.nl/wp-json/wp/v2/posts
+https://developer.mozilla.org/
+https://fonts.google.com/
 
 ## Licentie
 
